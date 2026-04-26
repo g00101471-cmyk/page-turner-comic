@@ -123,8 +123,8 @@ export default function ComicReader() {
       <div className="pointer-events-none absolute inset-y-0 left-0 w-3 md:w-6 bg-comic-red" />
       <div className="pointer-events-none absolute inset-y-0 right-0 w-3 md:w-6 bg-comic-red" />
 
-      <header className="relative z-10 px-6 md:px-12 pt-6 md:pt-8 flex items-center justify-between gap-4">
-        <div className="flex items-center gap-3 md:gap-5">
+      <header className="relative z-10 px-6 md:px-12 pt-4 md:pt-8 flex flex-wrap items-center justify-between gap-3 md:gap-4">
+        <div className="flex items-center gap-2 md:gap-5 order-2 md:order-1">
           <CharacterChip
             name="Shweta"
             src="/comic/shweta.png"
@@ -139,14 +139,14 @@ export default function ComicReader() {
           />
         </div>
 
-        <h1 className="font-display text-3xl md:text-5xl text-stroke text-comic-cream drop-shadow-[4px_4px_0_hsl(var(--comic-ink))] select-none">
+        <h1 className="font-display text-2xl md:text-5xl text-stroke text-comic-cream drop-shadow-[3px_3px_0_hsl(var(--comic-ink))] select-none order-1 md:order-2 w-full md:w-auto text-center">
           THE FULL THING
         </h1>
 
         <button
           onClick={fullscreen}
           aria-label="Fullscreen"
-          className="comic-border comic-shadow bg-comic-cream hover:bg-white transition-transform hover:-translate-y-0.5 active:translate-y-0 rounded-md p-2 md:p-3"
+          className="comic-border comic-shadow bg-comic-cream hover:bg-white transition-transform hover:-translate-y-0.5 active:translate-y-0 rounded-md p-2 md:p-3 order-3"
         >
           <Maximize2 className="w-4 h-4 md:w-5 md:h-5" />
         </button>
@@ -181,8 +181,8 @@ export default function ComicReader() {
       <main className="relative z-10 px-3 md:px-12 py-6 md:py-8">
         <div className="relative mx-auto max-w-6xl">
           {/* Page card */}
-          <div className="relative comic-border comic-shadow-lg bg-comic-cream rounded-xl overflow-hidden anim-wobble">
-            <div className="relative aspect-[2200/1238] w-full bg-comic-cream">
+          <div className="relative comic-border comic-shadow-lg bg-comic-cream rounded-xl overflow-hidden">
+            <div className="relative aspect-[2200/1238] w-full bg-comic-cream min-h-[200px]">
               {!imgLoaded && (
                 <div className="absolute inset-0 grid place-items-center">
                   <div className="font-display text-2xl md:text-4xl text-stroke text-comic-yellow">
