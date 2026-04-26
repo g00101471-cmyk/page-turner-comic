@@ -108,5 +108,63 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Patrick Hand', 'Comic Neue', system-ui, sans-serif;
   }
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Patrick+Hand&display=swap');
+
+@layer utilities {
+  .font-display {
+    font-family: 'Bangers', 'Impact', sans-serif;
+    letter-spacing: 0.04em;
+  }
+  .font-hand {
+    font-family: 'Patrick Hand', 'Comic Neue', sans-serif;
+  }
+  .comic-shadow {
+    box-shadow: 6px 6px 0 hsl(var(--comic-ink));
+  }
+  .comic-shadow-lg {
+    box-shadow: 10px 10px 0 hsl(var(--comic-ink));
+  }
+  .comic-border {
+    border: 3px solid hsl(var(--comic-ink));
+  }
+  .text-stroke {
+    -webkit-text-stroke: 2px hsl(var(--comic-ink));
+    paint-order: stroke fill;
+  }
+  .halftone {
+    background-image: radial-gradient(hsl(var(--comic-ink) / 0.18) 1.2px, transparent 1.4px);
+    background-size: 10px 10px;
+  }
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0) rotate(var(--tilt, 0deg)); }
+  50% { transform: translateY(-10px) rotate(var(--tilt, 0deg)); }
+}
+@keyframes pop-in {
+  0% { transform: scale(0.6) rotate(-8deg); opacity: 0; }
+  60% { transform: scale(1.05) rotate(2deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+@keyframes page-in {
+  0% { transform: translateX(40px) rotate(1deg); opacity: 0; }
+  100% { transform: translateX(0) rotate(0); opacity: 1; }
+}
+@keyframes page-in-reverse {
+  0% { transform: translateX(-40px) rotate(-1deg); opacity: 0; }
+  100% { transform: translateX(0) rotate(0); opacity: 1; }
+}
+@keyframes wobble {
+  0%, 100% { transform: rotate(-1deg); }
+  50% { transform: rotate(1deg); }
+}
+
+.anim-float { animation: float-y 3.5s ease-in-out infinite; }
+.anim-pop { animation: pop-in 0.5s cubic-bezier(.2,1.4,.4,1) both; }
+.anim-page-fwd { animation: page-in 0.45s cubic-bezier(.2,.9,.3,1.1) both; }
+.anim-page-back { animation: page-in-reverse 0.45s cubic-bezier(.2,.9,.3,1.1) both; }
+.anim-wobble { animation: wobble 4s ease-in-out infinite; }
