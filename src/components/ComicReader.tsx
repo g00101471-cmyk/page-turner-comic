@@ -200,6 +200,25 @@ export default function ComicReader() {
                 }`}
                 draggable={false}
               />
+              {/* Invisible click zones over the drawn Prev / Next buttons in the comic art.
+                  Positioned in the bottom-left and bottom-right corners where every page's
+                  buttons live, so the artwork stays visually unchanged. */}
+              {page > 1 && (
+                <button
+                  type="button"
+                  aria-label="Previous page"
+                  onClick={() => go(-1)}
+                  className="absolute left-0 bottom-0 w-[22%] h-[22%] cursor-pointer bg-transparent border-0 z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-comic-ink rounded-md"
+                />
+              )}
+              {page < TOTAL_PAGES && (
+                <button
+                  type="button"
+                  aria-label="Next page"
+                  onClick={() => go(1)}
+                  className="absolute right-0 bottom-0 w-[22%] h-[22%] cursor-pointer bg-transparent border-0 z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-comic-ink rounded-md"
+                />
+              )}
             </div>
           </div>
 
