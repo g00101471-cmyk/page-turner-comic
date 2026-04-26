@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
+import { Maximize2 } from "lucide-react";
 
 const TOTAL_PAGES = 54;
 const pad = (n: number) => n.toString().padStart(2, "0");
@@ -124,29 +124,14 @@ export default function ComicReader() {
       <div className="pointer-events-none absolute inset-y-0 right-0 w-3 md:w-6 bg-comic-red" />
 
       <header className="relative z-10 px-6 md:px-12 pt-4 md:pt-8 flex flex-wrap items-center justify-between gap-3 md:gap-4">
-        <div className="flex items-center gap-2 md:gap-5 order-2 md:order-1">
-          <CharacterChip
-            name="Shweta"
-            src="/comic/shweta.png"
-            active={beat.active === "shweta" || beat.active === "both"}
-            tilt={-4}
-          />
-          <CharacterChip
-            name="Wafa"
-            src="/comic/wafa.png"
-            active={beat.active === "wafa" || beat.active === "both"}
-            tilt={4}
-          />
-        </div>
-
-        <h1 className="font-display text-2xl md:text-5xl text-stroke text-comic-cream drop-shadow-[3px_3px_0_hsl(var(--comic-ink))] select-none order-1 md:order-2 w-full md:w-auto text-center">
+        <h1 className="font-display text-2xl md:text-5xl text-stroke text-comic-cream drop-shadow-[3px_3px_0_hsl(var(--comic-ink))] select-none text-center flex-1">
           THE FULL THING
         </h1>
 
         <button
           onClick={fullscreen}
           aria-label="Fullscreen"
-          className="comic-border comic-shadow bg-comic-cream hover:bg-white transition-transform hover:-translate-y-0.5 active:translate-y-0 rounded-md p-2 md:p-3 order-3"
+          className="comic-border comic-shadow bg-comic-cream hover:bg-white transition-transform hover:-translate-y-0.5 active:translate-y-0 rounded-md p-2 md:p-3"
         >
           <Maximize2 className="w-4 h-4 md:w-5 md:h-5" />
         </button>
@@ -230,138 +215,8 @@ export default function ComicReader() {
               )}
             </div>
           </div>
-
-          {/* Floating prev/next */}
-          <NavButton
-            side="left"
-            disabled={page === 1}
-            onClick={() => go(-1)}
-            label="Prev"
-          />
-          <NavButton
-            side="right"
-            disabled={page === TOTAL_PAGES}
-            onClick={() => go(1)}
-            label="Next"
-          />
-        </div>
-
-        {/* Big bottom controls (mobile + accessibility) */}
-        <div className="mx-auto max-w-6xl mt-6 flex items-center justify-between gap-4">
-          <BigButton
-            disabled={page === 1}
-            onClick={() => go(-1)}
-            icon={<ChevronLeft className="w-5 h-5" />}
-            label="Prev"
-          />
-          <p className="font-hand text-xs md:text-sm text-comic-ink/70 text-center max-w-md">
-            By Shweta &amp; Wafa — a story about names, algorithms, and two people
-            who found each other anyway.
-          </p>
-          <BigButton
-            disabled={page === TOTAL_PAGES}
-            onClick={() => go(1)}
-            icon={<ChevronRight className="w-5 h-5" />}
-            label="Next"
-            iconRight
-          />
         </div>
       </main>
     </div>
-  );
-}
-
-function CharacterChip({
-  name,
-  src,
-  active,
-  tilt,
-}: {
-  name: string;
-  src: string;
-  active: boolean;
-  tilt: number;
-}) {
-  return (
-    <div
-      className={`flex flex-col items-center transition-all duration-300 ${
-        active ? "scale-100 opacity-100" : "scale-90 opacity-50 grayscale"
-      }`}
-      style={{ ["--tilt" as string]: `${tilt}deg` }}
-    >
-      <div
-        className={`relative w-14 h-14 md:w-20 md:h-20 rounded-full overflow-hidden comic-border bg-comic-cream ${
-          active ? "anim-float comic-shadow" : ""
-        }`}
-        style={{ ["--tilt" as string]: `${tilt}deg`, transform: `rotate(${tilt}deg)` }}
-      >
-        <img src={src} alt={name} className="w-full h-full object-cover" draggable={false} />
-        {active && (
-          <span className="absolute -top-1 -right-1 w-3 h-3 md:w-4 md:h-4 rounded-full bg-comic-red comic-border" />
-        )}
-      </div>
-      <span
-        className={`mt-1 font-hand text-xs md:text-sm ${
-          active ? "text-comic-ink" : "text-comic-ink/50"
-        }`}
-      >
-        {name}
-      </span>
-    </div>
-  );
-}
-
-function NavButton({
-  side,
-  disabled,
-  onClick,
-  label,
-}: {
-  side: "left" | "right";
-  disabled: boolean;
-  onClick: () => void;
-  label: string;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      aria-label={label}
-      className={`hidden md:flex absolute top-1/2 -translate-y-1/2 ${
-        side === "left" ? "-left-6" : "-right-6"
-      } items-center justify-center w-14 h-14 rounded-full comic-border comic-shadow bg-comic-cream hover:bg-white transition-all hover:scale-110 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100 z-20`}
-    >
-      {side === "left" ? (
-        <ChevronLeft className="w-7 h-7" />
-      ) : (
-        <ChevronRight className="w-7 h-7" />
-      )}
-    </button>
-  );
-}
-
-function BigButton({
-  disabled,
-  onClick,
-  icon,
-  label,
-  iconRight,
-}: {
-  disabled: boolean;
-  onClick: () => void;
-  icon: React.ReactNode;
-  label: string;
-  iconRight?: boolean;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      className="font-display tracking-wide comic-border comic-shadow bg-comic-cream hover:bg-white px-4 md:px-6 py-2 md:py-3 rounded-md inline-flex items-center gap-2 text-base md:text-xl transition-transform hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:translate-y-0"
-    >
-      {!iconRight && icon}
-      {label}
-      {iconRight && icon}
-    </button>
   );
 }
