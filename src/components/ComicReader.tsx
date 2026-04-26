@@ -124,29 +124,14 @@ export default function ComicReader() {
       <div className="pointer-events-none absolute inset-y-0 right-0 w-3 md:w-6 bg-comic-red" />
 
       <header className="relative z-10 px-6 md:px-12 pt-4 md:pt-8 flex flex-wrap items-center justify-between gap-3 md:gap-4">
-        <div className="flex items-center gap-2 md:gap-5 order-2 md:order-1">
-          <CharacterChip
-            name="Shweta"
-            src="/comic/shweta.png"
-            active={beat.active === "shweta" || beat.active === "both"}
-            tilt={-4}
-          />
-          <CharacterChip
-            name="Wafa"
-            src="/comic/wafa.png"
-            active={beat.active === "wafa" || beat.active === "both"}
-            tilt={4}
-          />
-        </div>
-
-        <h1 className="font-display text-2xl md:text-5xl text-stroke text-comic-cream drop-shadow-[3px_3px_0_hsl(var(--comic-ink))] select-none order-1 md:order-2 w-full md:w-auto text-center">
+        <h1 className="font-display text-2xl md:text-5xl text-stroke text-comic-cream drop-shadow-[3px_3px_0_hsl(var(--comic-ink))] select-none text-center flex-1">
           THE FULL THING
         </h1>
 
         <button
           onClick={fullscreen}
           aria-label="Fullscreen"
-          className="comic-border comic-shadow bg-comic-cream hover:bg-white transition-transform hover:-translate-y-0.5 active:translate-y-0 rounded-md p-2 md:p-3 order-3"
+          className="comic-border comic-shadow bg-comic-cream hover:bg-white transition-transform hover:-translate-y-0.5 active:translate-y-0 rounded-md p-2 md:p-3"
         >
           <Maximize2 className="w-4 h-4 md:w-5 md:h-5" />
         </button>
@@ -230,41 +215,6 @@ export default function ComicReader() {
               )}
             </div>
           </div>
-
-          {/* Floating prev/next */}
-          <NavButton
-            side="left"
-            disabled={page === 1}
-            onClick={() => go(-1)}
-            label="Prev"
-          />
-          <NavButton
-            side="right"
-            disabled={page === TOTAL_PAGES}
-            onClick={() => go(1)}
-            label="Next"
-          />
-        </div>
-
-        {/* Big bottom controls (mobile + accessibility) */}
-        <div className="mx-auto max-w-6xl mt-6 flex items-center justify-between gap-4">
-          <BigButton
-            disabled={page === 1}
-            onClick={() => go(-1)}
-            icon={<ChevronLeft className="w-5 h-5" />}
-            label="Prev"
-          />
-          <p className="font-hand text-xs md:text-sm text-comic-ink/70 text-center max-w-md">
-            By Shweta &amp; Wafa — a story about names, algorithms, and two people
-            who found each other anyway.
-          </p>
-          <BigButton
-            disabled={page === TOTAL_PAGES}
-            onClick={() => go(1)}
-            icon={<ChevronRight className="w-5 h-5" />}
-            label="Next"
-            iconRight
-          />
         </div>
       </main>
     </div>
