@@ -180,9 +180,11 @@ export default function ComicReader() {
       {/* Stage */}
       <main className="relative z-10 px-3 md:px-12 py-6 md:py-8">
         <div className="relative mx-auto max-w-6xl">
-          {/* Page card */}
-          <div className="relative comic-border comic-shadow-lg bg-comic-cream rounded-xl overflow-hidden">
-            <div className="relative aspect-[2200/1238] w-full bg-comic-cream min-h-[200px]">
+          {/* Page card — width-driven on wide screens, height-capped on small/short viewports
+              so the full artwork is always visible without scrolling. */}
+          <div className="relative comic-border comic-shadow-lg bg-comic-cream rounded-xl overflow-hidden mx-auto w-full max-h-[calc(100svh-18rem)] md:max-h-[calc(100svh-14rem)]"
+               style={{ aspectRatio: "2200 / 1238" }}>
+            <div className="relative w-full h-full bg-comic-cream">
               {!imgLoaded && (
                 <div className="absolute inset-0 grid place-items-center">
                   <div className="font-display text-2xl md:text-4xl text-stroke text-comic-yellow">
