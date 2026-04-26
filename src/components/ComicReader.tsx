@@ -106,31 +106,20 @@ export default function ComicReader() {
   }, [go]);
 
   return (
-    <div className="min-h-screen bg-comic-yellow text-comic-ink relative overflow-hidden">
-      {/* halftone background texture */}
-      <div className="halftone pointer-events-none absolute inset-0 opacity-60" />
-      {/* red side bars echoing the comic */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-3 md:w-6 bg-comic-red" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-3 md:w-6 bg-comic-red" />
-
-      {/* Stage */}
-      <main className="relative z-10 px-3 md:px-12 py-4 md:py-8 min-h-screen flex items-center">
-        <div className="relative mx-auto max-w-6xl">
-          {/* Page card — sized so the full artwork always fits the viewport.
-              Width is capped by container, height is capped by viewport; aspect-ratio
-              keeps proportions and the smaller of the two constraints wins. */}
-          <div
-            className="relative comic-border comic-shadow-lg bg-comic-cream rounded-xl overflow-hidden mx-auto"
-            style={{
-              aspectRatio: "2200 / 1238",
-              width: "min(100%, calc((100svh - 4rem) * (2200 / 1238)))",
-              maxHeight: "calc(100svh - 4rem)",
-            }}
-          >
-            <div className="relative w-full h-full bg-comic-cream">
+    <div className="min-h-screen w-full bg-black flex items-center justify-center overflow-hidden">
+      {/* Page only — sized so the full artwork always fits the viewport. */}
+      <div
+        className="relative mx-auto"
+        style={{
+          aspectRatio: "2200 / 1238",
+          width: "min(100vw, calc(100svh * (2200 / 1238)))",
+          maxHeight: "100svh",
+        }}
+      >
+        <div className="relative w-full h-full">
               {!imgLoaded && (
                 <div className="absolute inset-0 grid place-items-center">
-                  <div className="font-display text-2xl md:text-4xl text-stroke text-comic-yellow">
+                  <div className="font-display text-2xl md:text-4xl text-white/70">
                     LOADING…
                   </div>
                 </div>
@@ -153,7 +142,7 @@ export default function ComicReader() {
                   type="button"
                   aria-label="Previous page"
                   onClick={() => go(-1)}
-                  className="absolute left-0 bottom-0 w-[22%] h-[22%] cursor-pointer bg-transparent border-0 z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-comic-ink rounded-md"
+                  className="absolute left-0 bottom-0 w-[22%] h-[22%] cursor-pointer bg-transparent border-0 z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60 rounded-md"
                 />
               )}
               {page < TOTAL_PAGES && (
@@ -161,13 +150,11 @@ export default function ComicReader() {
                   type="button"
                   aria-label="Next page"
                   onClick={() => go(1)}
-                  className="absolute right-0 bottom-0 w-[22%] h-[22%] cursor-pointer bg-transparent border-0 z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-comic-ink rounded-md"
+                  className="absolute right-0 bottom-0 w-[22%] h-[22%] cursor-pointer bg-transparent border-0 z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60 rounded-md"
                 />
               )}
             </div>
-          </div>
-        </div>
-      </main>
+      </div>
     </div>
   );
 }
