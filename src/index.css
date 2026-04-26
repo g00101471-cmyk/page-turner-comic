@@ -8,8 +8,15 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 45 95% 60%;
+    --foreground: 30 25% 12%;
+    --comic-yellow: 45 95% 60%;
+    --comic-red: 6 80% 62%;
+    --comic-cream: 42 60% 94%;
+    --comic-ink: 30 25% 12%;
+    --comic-pink: 350 70% 70%;
+    --comic-grey: 220 10% 45%;
+    --comic-shadow: 30 25% 12%;
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
