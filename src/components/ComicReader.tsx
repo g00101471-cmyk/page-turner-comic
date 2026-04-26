@@ -154,6 +154,7 @@ export default function ComicReader() {
                 />
               )}
             </div>
+      </div>
     </div>
   );
 }
