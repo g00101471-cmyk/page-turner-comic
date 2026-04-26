@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react";
-import { Maximize2 } from "lucide-react";
 
 const TOTAL_PAGES = 54;
 const pad = (n: number) => n.toString().padStart(2, "0");
@@ -106,15 +105,6 @@ export default function ComicReader() {
     return () => window.removeEventListener("keydown", onKey);
   }, [go]);
 
-  const beat = safeBeat(page);
-  const progress = (page / TOTAL_PAGES) * 100;
-
-  const fullscreen = () => {
-    const el = document.documentElement;
-    if (!document.fullscreenElement) el.requestFullscreen?.();
-    else document.exitFullscreen?.();
-  };
-
   return (
     <div className="min-h-screen bg-comic-yellow text-comic-ink relative overflow-hidden">
       {/* halftone background texture */}
@@ -123,47 +113,8 @@ export default function ComicReader() {
       <div className="pointer-events-none absolute inset-y-0 left-0 w-3 md:w-6 bg-comic-red" />
       <div className="pointer-events-none absolute inset-y-0 right-0 w-3 md:w-6 bg-comic-red" />
 
-      <header className="relative z-10 px-6 md:px-12 pt-4 md:pt-8 flex flex-wrap items-center justify-between gap-3 md:gap-4">
-        <h1 className="font-display text-2xl md:text-5xl text-stroke text-comic-cream drop-shadow-[3px_3px_0_hsl(var(--comic-ink))] select-none text-center flex-1">
-          THE FULL THING
-        </h1>
-
-        <button
-          onClick={fullscreen}
-          aria-label="Fullscreen"
-          className="comic-border comic-shadow bg-comic-cream hover:bg-white transition-transform hover:-translate-y-0.5 active:translate-y-0 rounded-md p-2 md:p-3"
-        >
-          <Maximize2 className="w-4 h-4 md:w-5 md:h-5" />
-        </button>
-      </header>
-
-      {/* Mood / page caption */}
-      <div className="relative z-10 px-6 md:px-12 mt-3 md:mt-4 flex items-center justify-between gap-4 text-comic-ink/80">
-        <span className="font-hand text-sm md:text-base">
-          Page <span className="font-display text-base md:text-lg">{page}</span>
-          <span className="opacity-60"> / {TOTAL_PAGES}</span>
-        </span>
-        <span
-          key={page + "-mood"}
-          className="anim-pop font-hand text-sm md:text-lg italic max-w-[60%] text-center truncate"
-        >
-          “{beat.mood}”
-        </span>
-        <span className="font-hand text-xs md:text-sm opacity-70 hidden sm:inline">
-          ← / → to flip
-        </span>
-      </div>
-
-      {/* Progress bar */}
-      <div className="relative z-10 mx-6 md:mx-12 mt-2 h-2 comic-border bg-comic-cream rounded-full overflow-hidden">
-        <div
-          className="h-full bg-comic-red transition-[width] duration-500 ease-out"
-          style={{ width: `${progress}%` }}
-        />
-      </div>
-
       {/* Stage */}
-      <main className="relative z-10 px-3 md:px-12 py-6 md:py-8">
+      <main className="relative z-10 px-3 md:px-12 py-4 md:py-8 min-h-screen flex items-center">
         <div className="relative mx-auto max-w-6xl">
           {/* Page card — sized so the full artwork always fits the viewport.
               Width is capped by container, height is capped by viewport; aspect-ratio
@@ -172,8 +123,8 @@ export default function ComicReader() {
             className="relative comic-border comic-shadow-lg bg-comic-cream rounded-xl overflow-hidden mx-auto"
             style={{
               aspectRatio: "2200 / 1238",
-              width: "min(100%, calc((100svh - 18rem) * (2200 / 1238)))",
-              maxHeight: "calc(100svh - 18rem)",
+              width: "min(100%, calc((100svh - 4rem) * (2200 / 1238)))",
+              maxHeight: "calc(100svh - 4rem)",
             }}
           >
             <div className="relative w-full h-full bg-comic-cream">
